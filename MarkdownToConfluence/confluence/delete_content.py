@@ -68,9 +68,6 @@ def delete_non_existing_descendants(space_key: str, root: str, exclude=[]):
         pages_in_space = confluence_utils.get_all_pages_in_space(space_key)
         
     pages_in_filesystem = get_all_page_names_in_filesystem(root)
-    for result in pages_in_space:
-        if (result['title'] not in pages_in_filesystem and result['title'] not in exclude):
-            # delete_page(result['id'], result['title'])
     
 
 def delete_all_pages_in_space(space_key):
@@ -84,8 +81,6 @@ def delete_all_pages_in_space(space_key):
         pages = get_all_pages_in_space(space_key)
     else:
         pages = confluence_utils.get_all_descendants(parent_page, space_key)
-    for page in pages:
-        #delete_page(page['id'])
 
 
 if __name__ == "__main__":
