@@ -1,8 +1,8 @@
-FROM python:3
+FROM python:3.11-alpine3.17
 
 WORKDIR /usr/src/app
 
-RUN apt-get install jq -y
+RUN apk add --no-cache jq
 COPY . .
 RUN pip install -r requirements.txt
 RUN pip install -e .
