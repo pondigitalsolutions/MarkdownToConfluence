@@ -1,15 +1,6 @@
-FROM ubuntu:latest
+FROM python:3
 
-RUN apt-get update && apt-get install -y software-properties-common gcc && \
-   add-apt-repository -y ppa:deadsnakes/ppa
-
-RUN apt-get install -y python3.6 python3-distutils python3-pip python3-apt python3-venv
-
-RUN python3 -m venv venv
-RUN chmod +x /venv/*
-RUN . /venv/bin/activate
-
-RUN apt-get -y install git jq
+WORKDIR /usr/src/app
 
 COPY setup.py /setup.py
 COPY requirements.txt requirements.txt
