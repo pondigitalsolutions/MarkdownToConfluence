@@ -2,6 +2,7 @@ import os
 from posixpath import dirname
 import requests
 import base64
+import urllib.parse
 
 
 def parse_mermaid_macros(filename):
@@ -11,6 +12,7 @@ def parse_mermaid_macros(filename):
     reading_mermaid = False
     graph = ""
     diagram_name = ""
+
     with open(f"{filename}", "r") as infile:
         lines = infile.readlines()
     with open(f"{filename}", "w") as outfile:
@@ -18,6 +20,7 @@ def parse_mermaid_macros(filename):
             if line.strip("\n") == "```mermaid":
                 reading_mermaid = True
                 mermaid_diagram_num += 1
+                graph = ""
                 diagram_name = f"mermaid-{mermaid_diagram_num}"
                 diagram_file_name = f'{str(filename).replace(".md","-")}{str(mermaid_diagram_num)}.png'
                 outfile.write(f'![{diagram_name}]({diagram_file_name})')
@@ -29,8 +32,10 @@ def parse_mermaid_macros(filename):
                     graphbytes = graph.encode("utf-8")
                     base64_bytes = base64.b64encode(graphbytes)
                     base64_string = base64_bytes.decode("utf-8")
-                    url = 'https://mermaid.ink/img/' + base64_string
+                    url = 'https://mermaid.ink/img/' + \
+                        urllib.parse.quote(base64_string, safe='')
                     response = requests.get(url)
+                    print(url)
                     if response.status_code == 200:
                         with open(diagram_file_name, 'wb') as imgfile:
                             imgfile.write(response.content)
