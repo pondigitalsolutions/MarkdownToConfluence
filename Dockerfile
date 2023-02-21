@@ -6,8 +6,8 @@ COPY . .
 RUN pip install -r requirements.txt
 RUN pip install -e .
 
-RUN chmod +x /usr/src/app/MarkdownToConfluence/convert_all.sh
-RUN chmod +x /usr/src/app/MarkdownToConfluence/convert.sh
-RUN chmod +x /usr/src/app/MarkdownToConfluence/entrypoint.sh
+RUN chmod +x MarkdownToConfluence/convert_all.sh
+RUN chmod +x MarkdownToConfluence/convert.sh
+RUN chmod +x MarkdownToConfluence/entrypoint.sh
 
-ENTRYPOINT [ "bash", "/usr/src/app/MarkdownToConfluence/entrypoint.sh" ]
+ENTRYPOINT [ "bash", "MarkdownToConfluence/entrypoint.sh" ]
