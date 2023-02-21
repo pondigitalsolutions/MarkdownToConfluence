@@ -2,6 +2,7 @@ FROM python:3
 
 WORKDIR /usr/src/app
 
+RUN apt-get install jq -y
 COPY . .
 RUN pip install -r requirements.txt
 RUN pip install -e .
