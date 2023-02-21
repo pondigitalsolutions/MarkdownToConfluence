@@ -35,7 +35,6 @@ def parse_mermaid_macros(filename):
                     url = 'https://mermaid.ink/img/' + \
                         urllib.parse.quote(base64_string, safe='')
                     response = requests.get(url)
-                    print(url)
                     if response.status_code == 200:
                         with open(diagram_file_name, 'wb') as imgfile:
                             imgfile.write(response.content)
