@@ -2,7 +2,7 @@ FROM python:3.11-alpine3.17
 
 WORKDIR /usr/src/app
 
-RUN apk add --no-cache jq bash
+RUN apk add --no-cache jq bash git
 COPY . .
 RUN pip install -r requirements.txt
 RUN pip install -e .
